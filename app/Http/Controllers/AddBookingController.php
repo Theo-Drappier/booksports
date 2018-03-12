@@ -24,10 +24,10 @@ class AddBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $fields = Fields::all();
-        return view('addbooking', compact('fields'));
+        return view('addbooking', ['fields' => $fields]);
     }
 
     /**
@@ -42,6 +42,19 @@ class AddBookingController extends Controller
         $endHour = $request->endHour;
         $userId = $request->userId;
         $fieldId = $request->fieldId;
+
+        $verifyBooking = Bookings::where([
+            ['booking_date', '=', $date],
+            ['field_id', '=', $fieldId]
+        ])->where(function($q) use ($startHour, $endHour) {
+            $q->whereBetween('start_hour', [$startHour, $endHour])
+              ->orWhereBetween('end_hour', [$startHour, $endHour]);
+        })->get();
+
+        if($verifyBooking->isNotEmpty()) {
+            $message = 'There is already a booking in the chosen period';
+            return redirect('addBooking')->with('message', $message);
+        }
 
         $booking = new Bookings;
         $booking->booking_date = $date;

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb8">
         <div class="col-md-8">
             <div class="card card-default">
                 <div class="card-header">Dashboard</div>
@@ -18,11 +18,13 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row justify-content-center mb8">
         <div class="col-md-8">
             <div class="card card-default">
                 <div class="card-header">Your bookings</div>
                 <div class="card-body">
-                    @if (empty($bookings))
+                    @if ($bookings->isNotEmpty())
                         <table>
                             <thead>
                                 <tr>
