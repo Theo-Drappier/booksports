@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Fields;
 use App\Bookings;
 use App\Http\Requests\AddBookingRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AddBookingController extends Controller
@@ -24,7 +25,7 @@ class AddBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+     public function index()
     {
         $fields = Fields::all();
         return view('addbooking', ['fields' => $fields]);
@@ -43,7 +44,7 @@ class AddBookingController extends Controller
         $userId = $request->userId;
         $fieldId = $request->fieldId;
 
-        $verifyBooking = Bookings::where([
+        $verifyBookingField = Bookings::where([
             ['booking_date', '=', $date],
             ['field_id', '=', $fieldId]
         ])->where(function($q) use ($startHour, $endHour) {
@@ -51,8 +52,21 @@ class AddBookingController extends Controller
               ->orWhereBetween('end_hour', [$startHour, $endHour]);
         })->get();
 
-        if($verifyBooking->isNotEmpty()) {
-            $message = 'There is already a booking in the chosen period';
+        if($verifyBookingField->isNotEmpty()) {
+            $message = 'There is already a booking in the chosen period.';
+            return redirect('addBooking')->with('message', $message);
+        }
+
+        $verifyBookingUser = Bookings::where([
+            ['booking_date', '=', $date],
+            ['user_id', '=', Auth::user()->id]
+        ])->where(function($q) use ($startHour, $endHour) {
+            $q->whereBetween('start_hour', [$startHour, $endHour])
+              ->orWhereBetween('end_hour', [$startHour, $endHour]);
+        })->get();
+
+        if($verifyBookingUser->isNotEmpty()) {
+            $message = 'You already have a booking on another field in the chosen period.';
             return redirect('addBooking')->with('message', $message);
         }
 

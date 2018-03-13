@@ -8,8 +8,8 @@
                 <div class="card-header">Create a new booking</div>
 
                 <div class="card-body">
-                    @if (!empty($message))
-                        <span class="invalid-feedback">{{ $message }}</span>
+                    @if (session('message'))
+                        <div class="error-message mb8">{{ session('message') }}</div>
                     @endif
                     <form action="{{ route('savebooking') }}" method="POST">
                         @csrf

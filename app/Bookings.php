@@ -16,4 +16,10 @@ class Bookings extends Model
         $field = Fields::where('id', $this->field_id)->first();
         return $field;
     }
+
+    public function setBookingDateFormat() {
+        $valueSplit = explode('-', $this->booking_date);
+        $result = $valueSplit[2].'/'.$valueSplit[1].'/'.$valueSplit[0];
+        return $result;
+    }
 }

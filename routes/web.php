@@ -19,5 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/listBooking', 'ListBookingController@index')->name('listbooking');
+
 Route::get('/addBooking', 'AddBookingController@index')->name('addbooking');
 Route::post('/addBooking', 'AddBookingController@send')->name('savebooking');

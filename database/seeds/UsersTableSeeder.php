@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
           'birth_date' => '1997-10-19',
           'address' => '1 rue test',
           'phone' => '0606060606',
+          'role' => 0,
           'email' => 'root@root.com',
           'password' => bcrypt('123456')
         ]);
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder
           'birth_date' => '1997-10-19',
           'address' => '1 rue test',
           'phone' => '0606060606',
+          'role' => 5,
           'email' => 'theo.drappier@gmail.com',
           'password' => bcrypt('123456')
         ]);

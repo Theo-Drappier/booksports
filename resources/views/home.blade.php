@@ -24,30 +24,34 @@
             <div class="card card-default">
                 <div class="card-header">Your bookings</div>
                 <div class="card-body">
-                    @if ($bookings->isNotEmpty())
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Heure de début</th>
-                                    <th>Heure de fin</th>
-                                    <th>Terrain</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($bookings as $booking)
-                                    <tr>
-                                        <td>{{ $booking->booking_date }}</td>
-                                        <td>{{ $booking->start_hour }}</td>
-                                        <td>{{ $booking->end_hour }}</td>
-                                        <td>{{ $booking->getFieldRow()->name }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    @if ($calendar)
+                        {!! $calendar->calendar() !!}
                     @else
                         <div>Vous n'avez aucune réservation en cours !</div>
                     @endif
+                    <!--if ($bookings->isNotEmpty())
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row bold center">
+                                    <div class="col-md-3">Date</div>
+                                    <div class="col-md-3">Heure de début</div>
+                                    <div class="col-md-3">Heure de fin</div>
+                                    <div class="col-md-3">Terrain</div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="col-md-12">
+                                foreach ($bookings as $booking)
+                                    <div class="row">
+                                        <div class="col-md-3">{ $booking->setBookingDateFormat() }}</div>
+                                        <div class="col-md-3">{ $booking->start_hour }}</div>
+                                        <div class="col-md-3">{ $booking->end_hour }}</div>
+                                        <div class="col-md-3">{ $booking->getFieldRow()->name }}</div>
+                                    </div>
+                                endforeach
+                            </div>
+                        </div>
+                    endif-->
                 </div>
             </div>
         </div>

@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+
 </head>
 <body>
     <div id="app">
@@ -28,7 +30,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                          <li><a class="nav-link" href="{{ route('addbooking') }}">Make a booking</a></li>
+                            <li><a class="nav-link" href="{{ route('addbooking') }}">Make a booking</a></li>
+                            @if (Auth::user()->role == 0)
+                                <li><a class="nav-link" href="{{ route('listbooking') }}"></li>
+                            @endif
                         @endauth
                     </ul>
 
@@ -68,5 +73,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @if (isset($calendar))
+        @if ($calendar)
+            <!-- Script FullCalendar -->
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+            {!! $calendar->script() !!}
+        @endif
+    @endif
 </body>
 </html>
