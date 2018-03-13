@@ -30,6 +30,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
+                            <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                             <li><a class="nav-link" href="{{ route('addbooking') }}">Make a booking</a></li>
                             @if (Auth::user()->role == 0)
                                 <li><a class="nav-link" href="{{ route('listbooking') }}">Bookings list</li>

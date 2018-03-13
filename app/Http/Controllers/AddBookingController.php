@@ -48,8 +48,13 @@ class AddBookingController extends Controller
             ['booking_date', '=', $date],
             ['field_id', '=', $fieldId]
         ])->where(function($q) use ($startHour, $endHour) {
-            $q->whereBetween('start_hour', [$startHour, $endHour])
-              ->orWhereBetween('end_hour', [$startHour, $endHour]);
+            $q->where([
+                ['start_hour', '>', $startHour],
+                ['start_hour', '<', $endHour]
+            ])->orWhere([
+                ['end_hour', '>', $startHour],
+                ['end_hour', '<', $endHour]
+            ]);
         })->get();
 
         if($verifyBookingField->isNotEmpty()) {
@@ -61,8 +66,13 @@ class AddBookingController extends Controller
             ['booking_date', '=', $date],
             ['user_id', '=', Auth::user()->id]
         ])->where(function($q) use ($startHour, $endHour) {
-            $q->whereBetween('start_hour', [$startHour, $endHour])
-              ->orWhereBetween('end_hour', [$startHour, $endHour]);
+            $q->where([
+                ['start_hour', '>', $startHour],
+                ['start_hour', '<', $endHour]
+            ])->orWhere([
+                ['end_hour', '>', $startHour],
+                ['end_hour', '<', $endHour]
+            ]);
         })->get();
 
         if($verifyBookingUser->isNotEmpty()) {
