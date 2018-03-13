@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Bookings;
 use Calendar;
+use App\Bookings;
+use App\Fields;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -29,7 +30,7 @@ class HomeController extends Controller
     {
         $events = [];
         $calendar = false;
-        $bookings = Bookings::where('user_id', Auth::user()->id)->get();
+        $bookings = Bookings::where('user_id', Auth::id())->get();
         if ($bookings->count()) {
             foreach($bookings as $booking) {
                 $events[] = Calendar::event(
@@ -40,7 +41,14 @@ class HomeController extends Controller
                 );
             }
             $calendar = Calendar::addEvents($events);
+            if (Auth::user()->role == 0) {
+                $calendar->setOptions([
+                    'defaultView' => 'agendaWeek',
+                    'aspectRatio' => 1.5
+                ]);
+            }
         }
-        return view('home', compact('calendar'));
+        $fields = Fields::all();
+        return view('home', ['calendar' => $calendar, 'fields' => $fields]);
     }
 }

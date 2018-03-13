@@ -23,3 +23,5 @@ Route::get('/listBooking', 'ListBookingController@index')->name('listbooking');
 
 Route::get('/addBooking', 'AddBookingController@index')->name('addbooking');
 Route::post('/addBooking', 'AddBookingController@send')->name('savebooking');
+
+Route::post('/listAvailableBooking', 'ListBookingController@available')->name('periodavbooking');

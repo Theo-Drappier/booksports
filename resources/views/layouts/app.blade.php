@@ -32,7 +32,7 @@
                         @auth
                             <li><a class="nav-link" href="{{ route('addbooking') }}">Make a booking</a></li>
                             @if (Auth::user()->role == 0)
-                                <li><a class="nav-link" href="{{ route('listbooking') }}"></li>
+                                <li><a class="nav-link" href="{{ route('listbooking') }}">Bookings list</li>
                             @endif
                         @endauth
                     </ul>
