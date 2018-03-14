@@ -17,6 +17,7 @@ class FieldsTableSeeder extends Seeder
           'sport_complex_id' => 1,
           'sport_id' => 1
         ]);
+        
         Fields::create([
           'name' => 'Salle B',
           'sport_complex_id' => 1,

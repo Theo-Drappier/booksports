@@ -43,7 +43,7 @@
                             <label for="birthDate" class="col-md-4 col-form-label text-md-right">Birth Date</label>
 
                             <div class="col-md-6">
-                                <input id="birthDate" type="text" class="form-control{{ $errors->has('birthDate') ? ' is-invalid' : '' }}" name="birthDate" value="{{ old('birthDate') }}" required autofocus>
+                                <input id="birthDate" type="date" class="form-control{{ $errors->has('birthDate') ? ' is-invalid' : '' }}" name="birthDate" value="{{ old('birthDate') }}" required autofocus>
 
                                 @if ($errors->has('birthDate'))
                                     <span class="invalid-feedback">
