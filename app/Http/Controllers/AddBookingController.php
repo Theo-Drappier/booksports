@@ -54,6 +54,10 @@ class AddBookingController extends Controller
             ])->orWhere([
                 ['end_hour', '>', $startHour],
                 ['end_hour', '<', $endHour]
+            ])->orWhere([
+                ['start_hour', '=', $startHour]
+            ])->orWhere([
+                ['end_hour', '=', $endHour]
             ]);
         })->get();
 
@@ -72,6 +76,10 @@ class AddBookingController extends Controller
             ])->orWhere([
                 ['end_hour', '>', $startHour],
                 ['end_hour', '<', $endHour]
+            ])->orWhere([
+                ['start_hour', '=', $startHour]
+            ])->orWhere([
+                ['end_hour', '=', $endHour]
             ]);
         })->get();
 
