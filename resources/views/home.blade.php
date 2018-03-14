@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="card card-default border-warning">
-                        <div class="card-header">Search period available</div>
+                        <div class="card-header">Search available period</div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('periodavbooking') }}">
                                 @csrf

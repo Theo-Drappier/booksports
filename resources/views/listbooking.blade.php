@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card card-default border-primary">
-                    <div class="card-header">Period available</div>
+                    <div class="card-header">Available Period</div>
                     <div class="card-body">
                         {!! $calendar->calendar() !!}
                     </div>
