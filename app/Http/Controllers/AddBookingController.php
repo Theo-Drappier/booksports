@@ -25,7 +25,7 @@ class AddBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
+    public function index()
     {
         $fields = Fields::all();
         return view('addbooking', ['fields' => $fields]);
@@ -49,15 +49,11 @@ class AddBookingController extends Controller
             ['field_id', '=', $fieldId]
         ])->where(function($q) use ($startHour, $endHour) {
             $q->where([
-                ['start_hour', '>', $startHour],
+                ['start_hour', '>=', $startHour],
                 ['start_hour', '<', $endHour]
             ])->orWhere([
                 ['end_hour', '>', $startHour],
-                ['end_hour', '<', $endHour]
-            ])->orWhere([
-                ['start_hour', '=', $startHour]
-            ])->orWhere([
-                ['end_hour', '=', $endHour]
+                ['end_hour', '<=', $endHour]
             ]);
         })->get();
 
@@ -71,15 +67,11 @@ class AddBookingController extends Controller
             ['user_id', '=', Auth::user()->id]
         ])->where(function($q) use ($startHour, $endHour) {
             $q->where([
-                ['start_hour', '>', $startHour],
+                ['start_hour', '>=', $startHour],
                 ['start_hour', '<', $endHour]
             ])->orWhere([
                 ['end_hour', '>', $startHour],
-                ['end_hour', '<', $endHour]
-            ])->orWhere([
-                ['start_hour', '=', $startHour]
-            ])->orWhere([
-                ['end_hour', '=', $endHour]
+                ['end_hour', '<=', $endHour]
             ]);
         })->get();
 

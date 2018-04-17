@@ -27,11 +27,10 @@ Route::post('/addBooking', 'AddBookingController@send')->name('savebooking');
 Route::post('/listAvailableBooking', 'ListBookingController@available')->name('periodavbooking');
 
 Route::get('/createAssoc', 'AddAssociationController@index')->name('createassoc');
-Route::post('/createAssoc', 'AddAssociationController@index')->name('saveassoc');
+Route::post('/createAssoc', 'AddAssociationController@send')->name('saveassoc');
 
-Route::get('/manageUser', 'ManageUserController@index')->name('manageuser');
-
-Route::get('/manageSchedule', 'ManageScheduleController@index')->name('manageschedule');
+Route::get('/manageUser', 'ManageUsersController@index')->name('manageuser');
+Route::post('/updateRoleUser', 'ManageUsersController@update')->name('updateroleuser');
 
 Route::get('/addLicensee', 'AddLicenseeController@index')->name('addlicensee');
-Route::post('/addLicensee', 'AddLicenseeController@index')->name('savelicensee');
+Route::post('/addLicensee', 'AddLicenseeController@send')->name('savelicensee');

@@ -34,10 +34,10 @@
                             @if (Auth::user()->role == 0)
                                 <li><a class="nav-link" href="{{ route('createassoc') }}">Create an association</a></li>
                                 <li><a class="nav-link" href="{{ route('manageuser') }}">Manage users</a></li>
-                            @elseif (Auth::user()->role == 1)
-                                <li><a class="nav-link" href="{{ route('manageschedule') }}">Manage schedule</a></li>
-                                <li><a class="nav-link" href="{{ route('addlicensee') }}">Add new licensee</a></li>
                             @else
+                                @if (Auth::user()->role == 1)
+                                    <li><a class="nav-link" href="{{ route('addlicensee') }}">Add new licensee</a></li>
+                                @endif
                                 <li><a class="nav-link" href="{{ route('addbooking') }}">Make a booking</a></li>
                             @endif
                         @endauth
@@ -88,5 +88,6 @@
             {!! $calendar->script() !!}
         @endif
     @endif
+    @yield('js')
 </body>
 </html>
