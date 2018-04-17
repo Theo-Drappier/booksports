@@ -61,7 +61,7 @@
                 <div class="col-md-12">
                     <div class="card card-default border-success">
                         <div class="card-header">
-                            @if (Auth::user()->role != 0)
+                            @if (Auth::user()->role > 0)
                                 <span>Your bookings</span>
                             @else
                                 <span>Week bookings</span>
@@ -70,6 +70,8 @@
                         <div class="card-body">
                             @if ($calendar)
                                 {!! $calendar->calendar() !!}
+                            @elseif (Auth::user()->role < 5)
+                                <div>There is no reservation !</div>
                             @else
                                 <div>You have no reservation !</div>
                             @endif

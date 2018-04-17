@@ -7,7 +7,11 @@
                 <div class="card">
                     <div class="card-header">Create a new association</div>
                     <div class="card-body">
-                        <form>
+                        @if (session('message'))
+                            <div class="error-message mb8">{{ session('message') }}</div>
+                        @endif
+                        <form action="{{ route('saveassoc') }}" method="POST">
+                            @csrf
                             <div class="form-group row">
                                 <label for="name" class="text-md-right col-md-4 col-form-label">Association Name</label>
                                 <div class="col-md-6">

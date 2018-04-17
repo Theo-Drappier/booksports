@@ -24,8 +24,8 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-          'name' => 'DRAPPIER',
-          'firstname' => 'Theo',
+          'name' => 'DOE',
+          'firstname' => 'John',
           'birth_date' => '1997-10-19',
           'address' => '1 rue test',
           'phone' => '0606060606',

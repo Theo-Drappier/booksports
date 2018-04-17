@@ -35,10 +35,10 @@
                                 <li><a class="nav-link" href="{{ route('createassoc') }}">Create an association</a></li>
                                 <li><a class="nav-link" href="{{ route('manageuser') }}">Manage users</a></li>
                             @else
+                                <li><a class="nav-link" href="{{ route('addbooking') }}">Make a booking</a></li>
                                 @if (Auth::user()->role == 1)
                                     <li><a class="nav-link" href="{{ route('addlicensee') }}">Add new licensee</a></li>
                                 @endif
-                                <li><a class="nav-link" href="{{ route('addbooking') }}">Make a booking</a></li>
                             @endif
                         @endauth
                     </ul>
@@ -52,7 +52,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }} {{ Auth::user()->firstname}} {{ Auth::user()->role === 1 ? "ASSOCIATION" : "" }}<span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"

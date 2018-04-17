@@ -76,13 +76,12 @@
                     roleUser: $("select#selectRole" + idUser + " option:selected").val(),
                     _token: '{{ csrf_token() }}'
                 };
-                console.log(bodyPost);
                 $.post(url,bodyPost, function (data) {
                     console.log(data);
+                    $("select#selectRole" + idUser).attr("disabled", true);
+                    $("button#edit" + idUser).removeClass("d-none");
+                    $(".editionRole" + idUser).addClass("d-none");
                 });
-                $("select#selectRole" + idUser).attr("disabled", true);
-                $("button#edit" + idUser).removeClass("d-none");
-                $(".editionRole" + idUser).addClass("d-none");
             });
         });
     </script>
