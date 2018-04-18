@@ -51,9 +51,11 @@
 @section('js')
     <script type="text/javascript">
         $(document).ready(function () {
+            var originRole;
             $("button.edit").click(function (e) {
                 var target = $(e.target).attr('id');
                 var idUser = target.replace('edit', '');
+                originRole = $("select#selectRole" + idUser + " option:selected").val();
                 $("select#selectRole" + idUser).removeAttr("disabled");
                 $("button#edit" + idUser).addClass("d-none");
                 $(".editionRole" + idUser).removeClass("d-none");
@@ -77,7 +79,10 @@
                     _token: '{{ csrf_token() }}'
                 };
                 $.post(url,bodyPost, function (data) {
-                    console.log(data);
+                    if (data.state) {
+                        alert('A manager association must have only one association linked. But this account got more than one association');
+                        $("select#selectRole" + idUser).val(originRole);
+                    }
                     $("select#selectRole" + idUser).attr("disabled", true);
                     $("button#edit" + idUser).removeClass("d-none");
                     $(".editionRole" + idUser).addClass("d-none");

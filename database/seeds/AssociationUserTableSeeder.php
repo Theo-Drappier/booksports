@@ -16,5 +16,15 @@ class AssociationUserTableSeeder extends Seeder
             'user_id' => 3,
             'association_id' => 1
         ]);
+
+        AssociationUser::create([
+            'user_id' => 4,
+            'association_id' => 1
+        ]);
+
+        AssociationUser::create([
+            'user_id' => 4,
+            'association_id' => 2
+        ]);
     }
 }

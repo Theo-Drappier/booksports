@@ -44,5 +44,27 @@ class UsersTableSeeder extends Seeder
             'email' => 'theo.drappier@assoc.com',
             'password' => bcrypt('123456')
         ]);
+
+        User::create([
+            'name' => 'TEST',
+            'firstname' => 'User',
+            'birth_date' => '1997-10-19',
+            'address' => '1 rue test',
+            'phone' => '0606060606',
+            'role' => 5,
+            'email' => 'test@test.fr',
+            'password' => bcrypt('123456')
+        ]);
+
+        User::create([
+            'name' => 'USER',
+            'firstname' => 'User',
+            'birth_date' => '1997-10-19',
+            'address' => '1 rue test',
+            'phone' => '0606060606',
+            'role' => 1,
+            'email' => 'user@assoc.fr',
+            'password' => bcrypt('123456')
+        ]);
     }
 }

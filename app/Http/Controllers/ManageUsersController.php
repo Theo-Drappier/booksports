@@ -29,14 +29,14 @@ class ManageUsersController extends Controller
     public function update(Request $request)
     {
         $user = User::find($request->idUser);
-        if (!AssociationUser::where('user_id', $user)->get()->count() < 2)
+        if (AssociationUser::where('user_id', $user->id)->get()->count() > 1 && $request->roleUser == 1)
         {
+            $error = ['state' => 'error'];
+            return $error;
+        } else {
             $user->role = $request->roleUser;
             $user->save();
             return $user;
-        } else {
-            $message = 'A manager association must have only one association linked. But this account got more than one association';
-            return $message;
         }
     }
 }
