@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Calendar;
 use App\Bookings;
+use App\Fields;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -26,7 +28,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $bookings = Bookings::where('user_id', Auth::user()->id)->get();
-        return view('home', compact('bookings'));
+        $events = [];
+        $calendar = false;
+        // If the user is the administrator, show all bookings
+        if (Auth::user()->role == 0) {
+            $bookings = Bookings::all();
+        } else {
+            $bookings = Bookings::where('user_id', Auth::id())->get();
+        }
+        if ($bookings->count()) {
+            foreach($bookings as $booking) {
+                $events[] = Calendar::event(
+                    $booking->getFieldRow()->name,
+                    false,
+                    new \DateTime($booking->booking_date.' '.$booking->start_hour),
+                    new \DateTime($booking->booking_date.' '.$booking->end_hour)
+                );
+            }
+            $calendar = Calendar::addEvents($events);
+            if (Auth::user()->role == 0) {
+                $calendar->setOptions([
+                    'defaultView' => 'agendaWeek',
+                    'aspectRatio' => 1.5
+                ]);
+            }
+        }
+        $fields = Fields::all();
+        return view('home', ['calendar' => $calendar, 'fields' => $fields]);
     }
 }
