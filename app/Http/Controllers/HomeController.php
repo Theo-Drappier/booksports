@@ -30,7 +30,12 @@ class HomeController extends Controller
     {
         $events = [];
         $calendar = false;
-        $bookings = Bookings::where('user_id', Auth::id())->get();
+        // If the user is the administrator, show all bookings
+        if (Auth::user()->role == 0) {
+            $bookings = Bookings::all();
+        } else {
+            $bookings = Bookings::where('user_id', Auth::id())->get();
+        }
         if ($bookings->count()) {
             foreach($bookings as $booking) {
                 $events[] = Calendar::event(
