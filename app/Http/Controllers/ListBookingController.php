@@ -13,6 +13,12 @@ class ListBookingController extends Controller
         return view('listbooking');
     }
 
+    /**
+     * Controller of the available booking page.
+     * We create a calendar with event when the event correspond to the available schedule
+     * @param  Request $request
+     * @return
+     */
     public function available(Request $request) {
         $date = $request->date;
         $fieldId = $request->fieldId;
@@ -22,6 +28,7 @@ class ListBookingController extends Controller
         ])->orderBy('start_hour', 'asc')->get();
         $events = [];
         if ($bookings->isEmpty()) {
+            // Create a new event for the calendar
             $events[] = Calendar::event(
                 'Available',
                 false,
@@ -32,8 +39,10 @@ class ListBookingController extends Controller
             $compt = 0;
             foreach($bookings as $booking) {
                 $endHour = $booking->start_hour;
+                // 06:00:00 is the start hour of the complex
                 if ($endHour != '06:00:00') {
                     if ($compt == 0) {
+                        // Create a new event for the calendar
                         $events[] = Calendar::event(
                             'Available',
                             false,
@@ -42,6 +51,7 @@ class ListBookingController extends Controller
                         );
                     } else {
                         if ($startHour != $endHour) {
+                            // Create a new event for the calendar
                             $events[] = Calendar::event(
                                 'Available',
                                 false,
@@ -54,8 +64,9 @@ class ListBookingController extends Controller
                 $startHour = $booking->end_hour;
                 $compt++;
             }
-
+            // 22:00:00 is the end hour of the complex
             if ($startHour != '22:00:00') {
+                // Create a new event for the calendar
                 $events[] = Calendar::event(
                     'Available',
                     false,
@@ -64,6 +75,7 @@ class ListBookingController extends Controller
                 );
             }
         }
+        // Create the calendar
         $calendar = Calendar::addEvents($events)->setOptions([
             'defaultView' => 'agendaDay',
             'defaultDate' => $date,

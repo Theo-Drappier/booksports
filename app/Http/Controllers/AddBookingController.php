@@ -44,6 +44,7 @@ class AddBookingController extends Controller
         $userId = $request->userId;
         $fieldId = $request->fieldId;
 
+        // Query to verify if there is already a booking in the chosen period
         $verifyBookingField = Bookings::where([
             ['booking_date', '=', $date],
             ['field_id', '=', $fieldId]
@@ -62,6 +63,7 @@ class AddBookingController extends Controller
             return redirect('addBooking')->with('message', $message);
         }
 
+        // Query to verify if the user has already a booking in the chosen period
         $verifyBookingUser = Bookings::where([
             ['booking_date', '=', $date],
             ['user_id', '=', Auth::user()->id]
@@ -80,6 +82,7 @@ class AddBookingController extends Controller
             return redirect('addBooking')->with('message', $message);
         }
 
+        // Create the bookings
         $booking = new Bookings;
         $booking->booking_date = $date;
         $booking->start_hour = $startHour;

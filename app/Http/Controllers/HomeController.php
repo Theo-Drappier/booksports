@@ -36,6 +36,7 @@ class HomeController extends Controller
         } else {
             $bookings = Bookings::where('user_id', Auth::id())->get();
         }
+        // Verify if there is bookings to create the calendar
         if ($bookings->count()) {
             foreach($bookings as $booking) {
                 $events[] = Calendar::event(

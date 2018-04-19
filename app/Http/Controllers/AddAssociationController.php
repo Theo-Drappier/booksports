@@ -19,6 +19,10 @@ class AddAssociationController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Controller of the page create association
+     * @return [type] [description]
+     */
     public function index()
     {
         $users = User::where('role', 1)->get();
@@ -35,6 +39,7 @@ class AddAssociationController extends Controller
     {
         $name = $request->name;
         $userId = $request->user;
+        // It's impossible to link a Manager Association to more than one association
         if(AssociationUser::where('user_id', $userId)->get()->count() > 0)
         {
             $message = "Error, this account is already linked to one association !";
