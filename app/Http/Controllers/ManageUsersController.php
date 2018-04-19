@@ -20,9 +20,7 @@ class ManageUsersController extends Controller
 
     public function index()
     {
-        $users = User::where([
-            ['role', '>', 1]
-        ])->get();
+        $users = User::all();
         return view('manageuser', ['users' => $users]);
     }
 

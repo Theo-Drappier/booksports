@@ -22,7 +22,8 @@ class AddAssociationController extends Controller
     public function index()
     {
         $users = User::where('role', 1)->get();
-        return view('createassoc', ['users' => $users]);
+        $associations = Associations::all();
+        return view('createassoc', ['users' => $users, 'associations' => $associations]);
     }
 
     /**

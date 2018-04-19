@@ -20,39 +20,41 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="card card-default border-warning">
-                        <div class="card-header">Search available period</div>
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('periodavbooking') }}">
-                                @csrf
-                                <div class="row form-group">
-                                    <label for="date" class="col-md-3 col-form-label text-md-right">Date</label>
-                                    <div class="col-md-7">
-                                        <input id="date" type="date" class="form-control" name="date" required autofocus />
+                @if (Auth::user()->role > 0)
+                    <div class="col-md-12">
+                        <div class="card card-default border-warning">
+                            <div class="card-header">Search available period</div>
+                            <div class="card-body">
+                                <form method="POST" action="{{ route('periodavbooking') }}">
+                                    @csrf
+                                    <div class="row form-group">
+                                        <label for="date" class="col-md-3 col-form-label text-md-right">Date</label>
+                                        <div class="col-md-7">
+                                            <input id="date" type="date" class="form-control" name="date" required autofocus />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row form-group">
-                                    <label for="fieldId" class="col-md-3 col-form-label text-md-right">Field</label>
-                                    <div class="col-md-7">
-                                        <select name="fieldId" id="fieldId" class="form-control">
-                                            @foreach ($fields as $field)
-                                              <option value="{{ $field->id }}">{{ $field->name }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="row form-group">
+                                        <label for="fieldId" class="col-md-3 col-form-label text-md-right">Field</label>
+                                        <div class="col-md-7">
+                                            <select name="fieldId" id="fieldId" class="form-control">
+                                                @foreach ($fields as $field)
+                                                  <option value="{{ $field->id }}">{{ $field->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            Search
-                                        </button>
+                                    <div class="row form-group">
+                                        <div class="col-md-6 offset-md-4">
+                                            <button type="submit" class="btn btn-primary">
+                                                Search
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
 
