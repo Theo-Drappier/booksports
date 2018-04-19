@@ -22,7 +22,7 @@
 
 * Aller dans le répertoire où vous voulez installer votre projet.
 
-* Exécuter : 
+* Exécuter :
     ```
     git clone https://github.com/Theo-Drappier/booksports.git
     ```
@@ -33,10 +33,13 @@
     ```
     composer install
     ```
-    
-* Copier le fichier « .env.example », le renommer en « .env » et l’éditer :
 
-// Screenshot fichier
+* Copier le fichier « .env.example », le renommer en « .env » et l’éditer en modifiant les champs de connexion à la base de données selon vos paramètres :
+
+        * DB_CONNECTION=sgbd_utilisé
+        * DB_DATABASE=nom_de_la_base
+        * DB_USERNAME=nom_utilisateur_connexion_bdd
+        * DB_PASSWORD=mot_de_passe_utilisateur
 
 * Enregistrer les modifications.
 
