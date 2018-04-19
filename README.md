@@ -35,27 +35,27 @@
     ```
 
 * Copier le fichier « .env.example », le renommer en « .env » et l’éditer en modifiant les champs de connexion à la base de données selon vos paramètres :
-```
-DB_CONNECTION=sgbd_utilisé
-DB_DATABASE=nom_de_la_base
-DB_USERNAME=nom_utilisateur_connexion_bdd
-DB_PASSWORD=mot_de_passe_utilisateur
-```
+    ```
+    DB_CONNECTION=sgbd_utilisé
+    DB_DATABASE=nom_de_la_base
+    DB_USERNAME=nom_utilisateur_connexion_bdd
+    DB_PASSWORD=mot_de_passe_utilisateur
+    ```
 * Enregistrer les modifications.
 
 * Génération d’une « application key » :
-```
-php artisan key:generate
-```
+    ```
+    php artisan key:generate
+    ```
 * Génération de la base de données ainsi que les données :
-```
-php artisan migrate --seed
-```
+    ```
+    php artisan migrate --seed
+    ```
 
 * Lancer le serveur Laravel :
-```
-php artisan serve
-```
+    ```
+    php artisan serve
+    ```
 
 * Rendez-vous sur votre navigateur internet à l'adresse ```localhost:8000```
 
